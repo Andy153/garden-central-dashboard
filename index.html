@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Central de Dashboards | Marcas Auto</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #15171c;
+        --muted: #666b76;
+        --line: #d9dee8;
+        --page: #f4f6f9;
+        --panel: #ffffff;
+        --panel-2: #eef2f6;
+        --accent: #176b87;
+        --accent-2: #c84b31;
+        --ok: #167a47;
+        --warn: #9b5d00;
+        --shadow: 0 18px 45px rgba(22, 32, 48, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        color: var(--ink);
+        background:
+          linear-gradient(135deg, rgba(23, 107, 135, 0.15), transparent 35%),
+          linear-gradient(315deg, rgba(200, 75, 49, 0.12), transparent 38%),
+          var(--page);
+      }
+
+      button,
+      input,
+      a {
+        font: inherit;
+      }
+
+      .app {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 32px 0 42px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 26px;
+      }
+
+      .brand-mark {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-width: 0;
+      }
+
+      .identity-logos {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex: 0 0 auto;
+      }
+
+      .identity-logo {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 58px;
+        height: 58px;
+        border: 1px solid rgba(255, 255, 255, 0.72);
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 8px 22px rgba(27, 37, 52, 0.08);
+      }
+
+      .garden-logo {
+        background: #dd101f;
+      }
+
+      .hub-logo {
+        background: #ff640b;
+      }
+
+      .hub-logo img {
+        filter: brightness(0) invert(1);
+      }
+
+      .identity-logo svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .identity-logo img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+      }
+
+      .identity-logo.hub-logo img {
+        width: 76%;
+        height: 76%;
+        object-fit: contain;
+      }
+
+      .title-block {
+        min-width: 0;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(1.55rem, 3vw, 2.35rem);
+        line-height: 1.05;
+        letter-spacing: 0;
+      }
+
+      .subtitle {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 0.98rem;
+      }
+
+      .toolbar {
+        display: flex;
+        align-items: center;
+        margin-bottom: 22px;
+      }
+
+      .search {
+        position: relative;
+        width: min(100%, 420px);
+      }
+
+      .search svg {
+        position: absolute;
+        left: 13px;
+        top: 50%;
+        width: 18px;
+        height: 18px;
+        transform: translateY(-50%);
+        color: var(--muted);
+      }
+
+      .search input {
+        width: 100%;
+        height: 44px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.88);
+        padding: 0 14px 0 42px;
+        outline: none;
+        color: var(--ink);
+        box-shadow: 0 10px 26px rgba(27, 37, 52, 0.06);
+      }
+
+      .search input:focus {
+        border-color: rgba(23, 107, 135, 0.65);
+        box-shadow: 0 0 0 4px rgba(23, 107, 135, 0.13);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+      }
+
+      .card {
+        position: relative;
+        min-height: 214px;
+        border: 1px solid rgba(217, 222, 232, 0.95);
+        border-radius: 8px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.9)),
+          var(--panel);
+        box-shadow: 0 12px 34px rgba(27, 37, 52, 0.09);
+        overflow: hidden;
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease,
+          border-color 180ms ease;
+      }
+
+      .card[data-ready="true"]:hover {
+        transform: translateY(-3px);
+        border-color: rgba(23, 107, 135, 0.45);
+        box-shadow: var(--shadow);
+      }
+
+      .card-inner {
+        display: flex;
+        min-height: 214px;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 18px;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .card[data-ready="false"] .card-inner {
+        cursor: not-allowed;
+      }
+
+      .logo-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 14px;
+      }
+
+      .logo-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 96px;
+        height: 68px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel-2);
+        padding: 13px;
+      }
+
+      .logo-box.duo {
+        gap: 10px;
+      }
+
+      .logo-box.wide {
+        width: 126px;
+        padding: 10px 12px;
+      }
+
+      .logo-box img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.65));
+      }
+
+      .logo-box.duo img {
+        width: 38px;
+        max-width: 42%;
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border-radius: 999px;
+        padding: 6px 9px;
+        font-size: 0.76rem;
+        font-weight: 750;
+        color: var(--ok);
+        background: rgba(22, 122, 71, 0.1);
+      }
+
+      .status.missing {
+        color: var(--warn);
+        background: rgba(155, 93, 0, 0.11);
+      }
+
+      .status-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 999px;
+        background: currentColor;
+      }
+
+      .card h2 {
+        margin: 18px 0 6px;
+        font-size: 1.33rem;
+        line-height: 1.15;
+        letter-spacing: 0;
+      }
+
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.93rem;
+      }
+
+      .action {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        margin-top: 20px;
+        border-top: 1px solid var(--line);
+        padding-top: 14px;
+        color: var(--accent);
+        font-weight: 780;
+      }
+
+      .card[data-ready="false"] {
+        background: rgba(255, 255, 255, 0.62);
+      }
+
+      .card[data-ready="false"] .logo-box,
+      .card[data-ready="false"] h2,
+      .card[data-ready="false"] p {
+        opacity: 0.62;
+      }
+
+      .card[data-ready="false"] .action {
+        color: var(--muted);
+      }
+
+      .arrow {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        background: rgba(23, 107, 135, 0.1);
+      }
+
+      .empty {
+        display: none;
+        border: 1px dashed var(--line);
+        border-radius: 8px;
+        padding: 22px;
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--muted);
+      }
+
+      .empty.show {
+        display: block;
+      }
+
+      @media (max-width: 720px) {
+        .app {
+          width: min(100% - 22px, 1180px);
+          padding-top: 20px;
+        }
+
+        .topbar {
+          display: grid;
+          grid-template-columns: 1fr;
+        }
+
+        .brand-mark {
+          align-items: flex-start;
+        }
+
+        .identity-logo {
+          width: 48px;
+          height: 48px;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="app">
+      <header class="topbar">
+        <div class="brand-mark">
+          <div class="identity-logos" aria-label="Grupo Garden y equipo dashboards">
+            <div class="identity-logo garden-logo" title="Grupo Garden">
+              <svg viewBox="0 0 225 225" role="img" aria-label="Logo Grupo Garden">
+                <rect width="225" height="225" fill="#dd101f" />
+                <path
+                  d="M63 57h99c15.5 0 28 12.5 28 28v83H63c-15.5 0-28-12.5-28-28V85c0-15.5 12.5-28 28-28Z"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="4.5"
+                />
+                <text
+                  x="49"
+                  y="150"
+                  fill="#fff"
+                  font-family="Inter, Arial, sans-serif"
+                  font-size="39"
+                  font-weight="800"
+                  letter-spacing="-1"
+                >
+                  Garden
+                </text>
+              </svg>
+            </div>
+            <div class="identity-logo hub-logo" title="Hyppo">
+              <img
+                src="https://hyppo.io/wp-content/uploads/2024/08/cropped-Isologo_Hyppo-Orange-270x270.png"
+                alt="Logo Hyppo"
+              />
+            </div>
+          </div>
+          <div class="title-block">
+            <h1>Central de dashboards</h1>
+            <p class="subtitle">Accesos rápidos por marca, con links directos a Looker Studio.</p>
+          </div>
+        </div>
+      </header>
+
+      <section class="toolbar" aria-label="Herramientas">
+        <label class="search">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="m21 21-4.3-4.3m1.3-5.2a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+          <input id="search" type="search" placeholder="Buscar marca" autocomplete="off" />
+        </label>
+      </section>
+
+      <section id="grid" class="grid" aria-live="polite"></section>
+      <p id="empty" class="empty">No encontré marcas con esa búsqueda.</p>
+    </main>
+
+    <script>
+      const dashboards = [
+        {
+          name: "Nissan",
+          slug: "nissan",
+          url: "https://datastudio.google.com/u/0/reporting/f480ca6c-1c7e-46b1-9188-fde319b899cc/page/p_uepaetz5vd",
+        },
+        {
+          name: "Fiat",
+          slug: "fiat",
+          url: "https://datastudio.google.com/u/0/reporting/976d9958-05b7-4f68-96cc-6a1e6c4448e2/page/p_uepaetz5vd",
+        },
+        {
+          name: "Jeep / Ram",
+          slug: ["jeep", "ram"],
+          url: "https://datastudio.google.com/u/0/reporting/82f9593b-6484-404e-8b7b-4e37857d8e58/page/p_uepaetz5vd",
+        },
+        {
+          name: "Kia",
+          slug: "kia",
+          url: "https://datastudio.google.com/u/0/reporting/d91a3cfe-78dd-4e6f-be94-cc27d953b210/page/p_uepaetz5vd/edit",
+        },
+        {
+          name: "Chery",
+          slug: "chery",
+          logoSrc: "https://upload.wikimedia.org/wikipedia/commons/b/b6/Chery_logo.svg",
+          logoWide: true,
+          url: "https://datastudio.google.com/u/0/reporting/9978c342-33a1-4945-a3c9-687528dc29b8/page/p_iz784com0d",
+        },
+        {
+          name: "Mini",
+          slug: "mini",
+          url: "https://datastudio.google.com/u/0/reporting/196b9ff5-3862-44fe-9797-49ba2a16e586/page/p_iz784com0d/edit",
+        },
+        {
+          name: "BMW",
+          slug: "bmw",
+          url: "https://datastudio.google.com/u/0/reporting/a2d0e9c6-ed9a-419a-9146-46704cfbffba/page/p_j93cyedlwd/edit",
+        },
+        {
+          name: "Chevrolet",
+          slug: "chevrolet",
+          url: "https://datastudio.google.com/u/0/reporting/06231e88-740b-4be9-9693-ae06abf1c1b4/page/p_uepaetz5vd",
+        },
+        { name: "Volvo", slug: "volvo", url: "" },
+        { name: "Mazda", slug: "mazda", url: "" },
+      ];
+
+      const grid = document.querySelector("#grid");
+      const empty = document.querySelector("#empty");
+      const search = document.querySelector("#search");
+
+      const logoUrl = (slug) => `https://cdn.simpleicons.org/${slug}/15171C`;
+
+      function fallbackLogo(img, name) {
+        const initials = name
+          .split(/\s|\/+/)
+          .filter(Boolean)
+          .map((word) => word[0])
+          .slice(0, 2)
+          .join("")
+          .toUpperCase();
+        img.replaceWith(document.createTextNode(initials));
+      }
+
+      function logoMarkup(item) {
+        if (item.logoSrc) {
+          const className = item.logoWide ? "logo-box wide" : "logo-box";
+          return `<div class="${className}">
+            <img src="${item.logoSrc}" alt="Logo ${item.name}" onerror="fallbackLogo(this, '${item.name}')" />
+          </div>`;
+        }
+
+        const slugs = Array.isArray(item.slug) ? item.slug : [item.slug];
+        const className = slugs.length > 1 ? "logo-box duo" : "logo-box";
+        const logos = slugs
+          .map(
+            (slug) =>
+              `<img src="${logoUrl(slug)}" alt="Logo ${item.name}" onerror="fallbackLogo(this, '${item.name}')" />`,
+          )
+          .join("");
+        return `<div class="${className}">${logos}</div>`;
+      }
+
+      function cardMarkup(item) {
+        const ready = Boolean(item.url);
+        const status = ready ? "Disponible" : "Falta link";
+        const body = `
+          <div>
+            <div class="logo-row">
+              ${logoMarkup(item)}
+              <span class="status ${ready ? "" : "missing"}">
+                <span class="status-dot" aria-hidden="true"></span>${status}
+              </span>
+            </div>
+            <h2>${item.name}</h2>
+            <p>${ready ? "Dashboard de performance y métricas." : "Pendiente de cargar el acceso."}</p>
+          </div>
+          <div class="action">
+            <span>${ready ? "Abrir dashboard" : "Sin acceso cargado"}</span>
+            <span class="arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+          </div>
+        `;
+
+        if (!ready) {
+          return `<article class="card" data-ready="false" data-name="${item.name.toLowerCase()}"><div class="card-inner" aria-disabled="true">${body}</div></article>`;
+        }
+
+        return `<article class="card" data-ready="true" data-name="${item.name.toLowerCase()}"><a class="card-inner" href="${item.url}" target="_blank" rel="noreferrer noopener" aria-label="Abrir dashboard de ${item.name}">${body}</a></article>`;
+      }
+
+      function render() {
+        const query = search.value.trim().toLowerCase();
+        const filtered = dashboards.filter((item) => item.name.toLowerCase().includes(query));
+        grid.innerHTML = filtered.map(cardMarkup).join("");
+        empty.classList.toggle("show", filtered.length === 0);
+      }
+
+      search.addEventListener("input", render);
+      render();
+    </script>
+  </body>
+</html>
