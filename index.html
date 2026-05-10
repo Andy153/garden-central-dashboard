@@ -20,12 +20,16 @@
         --shadow: 0 18px 45px rgba(22, 32, 48, 0.12);
       }
 
-      * { box-sizing: border-box; }
+      * {
+        box-sizing: border-box;
+      }
 
       body {
         margin: 0;
         min-height: 100vh;
-        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
         color: var(--ink);
         background:
           linear-gradient(135deg, rgba(23, 107, 135, 0.15), transparent 35%),
@@ -33,7 +37,11 @@
           var(--page);
       }
 
-      button, input, a { font: inherit; }
+      button,
+      input,
+      a {
+        font: inherit;
+      }
 
       .app {
         width: min(1180px, calc(100% - 32px));
@@ -75,20 +83,46 @@
         box-shadow: 0 8px 22px rgba(27, 37, 52, 0.08);
       }
 
-      .garden-logo { background: #dd101f; }
-      .hub-logo { background: #ff640b; }
-      .hub-logo img { filter: brightness(0) invert(1); }
+      .garden-logo {
+        background: #dd101f;
+      }
 
-      .identity-logo svg { width: 100%; height: 100%; display: block; }
-      .identity-logo img { width: 100%; height: 100%; display: block; object-fit: cover; }
-      .identity-logo.hub-logo img { width: 76%; height: 76%; object-fit: contain; }
+      .hub-logo {
+        background: #ff640b;
+      }
 
-      .title-block { min-width: 0; }
+      .hub-logo img {
+        filter: brightness(0) invert(1);
+      }
+
+      .identity-logo svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .identity-logo img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+      }
+
+      .identity-logo.hub-logo img {
+        width: 76%;
+        height: 76%;
+        object-fit: contain;
+      }
+
+      .title-block {
+        min-width: 0;
+      }
 
       h1 {
         margin: 0;
         font-size: clamp(1.55rem, 3vw, 2.35rem);
         line-height: 1.05;
+        letter-spacing: 0;
       }
 
       .subtitle {
@@ -151,7 +185,10 @@
           var(--panel);
         box-shadow: 0 12px 34px rgba(27, 37, 52, 0.09);
         overflow: hidden;
-        transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease,
+          border-color 180ms ease;
       }
 
       .card[data-ready="true"]:hover {
@@ -170,7 +207,9 @@
         color: inherit;
       }
 
-      .card[data-ready="false"] .card-inner { cursor: not-allowed; }
+      .card[data-ready="false"] .card-inner {
+        cursor: not-allowed;
+      }
 
       .logo-row {
         display: flex;
@@ -188,18 +227,29 @@
         border: 1px solid var(--line);
         border-radius: 8px;
         background: var(--panel-2);
-        padding: 10px;
+        padding: 13px;
       }
 
-      .logo-box.duo { gap: 8px; }
+      .logo-box.duo {
+        gap: 10px;
+      }
+
+      .logo-box.wide {
+        width: 126px;
+        padding: 10px 12px;
+      }
 
       .logo-box img {
         max-width: 100%;
         max-height: 100%;
         object-fit: contain;
+        filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.65));
       }
 
-      .logo-box.duo img { max-width: 44%; }
+      .logo-box.duo img {
+        width: 38px;
+        max-width: 42%;
+      }
 
       .status {
         display: inline-flex;
@@ -229,6 +279,7 @@
         margin: 18px 0 6px;
         font-size: 1.33rem;
         line-height: 1.15;
+        letter-spacing: 0;
       }
 
       .card p {
@@ -249,11 +300,19 @@
         font-weight: 780;
       }
 
-      .card[data-ready="false"] { background: rgba(255, 255, 255, 0.62); }
+      .card[data-ready="false"] {
+        background: rgba(255, 255, 255, 0.62);
+      }
+
       .card[data-ready="false"] .logo-box,
       .card[data-ready="false"] h2,
-      .card[data-ready="false"] p { opacity: 0.62; }
-      .card[data-ready="false"] .action { color: var(--muted); }
+      .card[data-ready="false"] p {
+        opacity: 0.62;
+      }
+
+      .card[data-ready="false"] .action {
+        color: var(--muted);
+      }
 
       .arrow {
         display: grid;
@@ -273,14 +332,33 @@
         color: var(--muted);
       }
 
-      .empty.show { display: block; }
+      .empty.show {
+        display: block;
+      }
 
       @media (max-width: 720px) {
-        .app { width: min(100% - 22px, 1180px); padding-top: 20px; }
-        .topbar { display: grid; grid-template-columns: 1fr; }
-        .brand-mark { align-items: flex-start; }
-        .identity-logo { width: 48px; height: 48px; }
-        .grid { grid-template-columns: 1fr; }
+        .app {
+          width: min(100% - 22px, 1180px);
+          padding-top: 20px;
+        }
+
+        .topbar {
+          display: grid;
+          grid-template-columns: 1fr;
+        }
+
+        .brand-mark {
+          align-items: flex-start;
+        }
+
+        .identity-logo {
+          width: 48px;
+          height: 48px;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -298,11 +376,24 @@
                   stroke="#fff"
                   stroke-width="4.5"
                 />
-                <text x="49" y="150" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="39" font-weight="800" letter-spacing="-1">Garden</text>
+                <text
+                  x="49"
+                  y="150"
+                  fill="#fff"
+                  font-family="Inter, Arial, sans-serif"
+                  font-size="39"
+                  font-weight="800"
+                  letter-spacing="-1"
+                >
+                  Garden
+                </text>
               </svg>
             </div>
             <div class="identity-logo hub-logo" title="Hyppo">
-              <img src="https://hyppo.io/wp-content/uploads/2024/08/cropped-Isologo_Hyppo-Orange-270x270.png" alt="Logo Hyppo" />
+              <img
+                src="https://hyppo.io/wp-content/uploads/2024/08/cropped-Isologo_Hyppo-Orange-270x270.png"
+                alt="Logo Hyppo"
+              />
             </div>
           </div>
           <div class="title-block">
@@ -315,7 +406,13 @@
       <section class="toolbar" aria-label="Herramientas">
         <label class="search">
           <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="m21 21-4.3-4.3m1.3-5.2a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <path
+              d="m21 21-4.3-4.3m1.3-5.2a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
           </svg>
           <input id="search" type="search" placeholder="Buscar marca" autocomplete="off" />
         </label>
@@ -326,40 +423,86 @@
     </main>
 
     <script>
-      const LOGO_BASE = "https://cdn.jsdelivr.net/gh/filippofilip95/car-logos-dataset@master/logos/optimized";
-
       const dashboards = [
-        { name: "Nissan",     logos: ["nissan"],      url: "https://datastudio.google.com/u/0/reporting/f480ca6c-1c7e-46b1-9188-fde319b899cc/page/p_uepaetz5vd" },
-        { name: "Fiat",       logos: ["fiat"],        url: "https://datastudio.google.com/u/0/reporting/976d9958-05b7-4f68-96cc-6a1e6c4448e2/page/p_uepaetz5vd" },
-        { name: "Jeep / Ram", logos: ["jeep", "ram"], url: "https://datastudio.google.com/u/0/reporting/82f9593b-6484-404e-8b7b-4e37857d8e58/page/p_uepaetz5vd" },
-        { name: "Kia",        logos: ["kia"],         url: "https://datastudio.google.com/u/0/reporting/d91a3cfe-78dd-4e6f-be94-cc27d953b210/page/p_uepaetz5vd/edit" },
-        { name: "Chery",      logos: ["chery"],       url: "https://datastudio.google.com/u/0/reporting/9978c342-33a1-4945-a3c9-687528dc29b8/page/p_iz784com0d" },
-        { name: "Mini",       logos: ["mini"],        url: "https://datastudio.google.com/u/0/reporting/196b9ff5-3862-44fe-9797-49ba2a16e586/page/p_iz784com0d/edit" },
-        { name: "BMW",        logos: ["bmw"],         url: "https://datastudio.google.com/u/0/reporting/a2d0e9c6-ed9a-419a-9146-46704cfbffba/page/p_j93cyedlwd/edit" },
-        { name: "Chevrolet",  logos: ["chevrolet"],   url: "https://datastudio.google.com/u/0/reporting/06231e88-740b-4be9-9693-ae06abf1c1b4/page/p_uepaetz5vd" },
-        { name: "Volvo",      logos: ["volvo"],       url: "https://datastudio.google.com/u/0/reporting/6be4fa37-a5a2-40e8-9f39-23e0d3fc1189/page/p_uepaetz5vd" },
-        { name: "Mazda",      logos: ["mazda"],       url: "" },
+        {
+          name: "Nissan",
+          slug: "nissan",
+          url: "https://datastudio.google.com/u/0/reporting/f480ca6c-1c7e-46b1-9188-fde319b899cc/page/p_uepaetz5vd",
+        },
+        {
+          name: "Fiat",
+          slug: "fiat",
+          url: "https://datastudio.google.com/u/0/reporting/976d9958-05b7-4f68-96cc-6a1e6c4448e2/page/p_uepaetz5vd",
+        },
+        {
+          name: "Jeep / Ram",
+          slug: ["jeep", "ram"],
+          url: "https://datastudio.google.com/u/0/reporting/82f9593b-6484-404e-8b7b-4e37857d8e58/page/p_uepaetz5vd",
+        },
+        {
+          name: "Kia",
+          slug: "kia",
+          url: "https://datastudio.google.com/u/0/reporting/d91a3cfe-78dd-4e6f-be94-cc27d953b210/page/p_uepaetz5vd/edit",
+        },
+        {
+          name: "Chery",
+          slug: "chery",
+          logoSrc: "https://upload.wikimedia.org/wikipedia/commons/b/b6/Chery_logo.svg",
+          logoWide: true,
+          url: "https://datastudio.google.com/u/0/reporting/9978c342-33a1-4945-a3c9-687528dc29b8/page/p_iz784com0d",
+        },
+        {
+          name: "Mini",
+          slug: "mini",
+          url: "https://datastudio.google.com/u/0/reporting/196b9ff5-3862-44fe-9797-49ba2a16e586/page/p_iz784com0d/edit",
+        },
+        {
+          name: "BMW",
+          slug: "bmw",
+          url: "https://datastudio.google.com/u/0/reporting/a2d0e9c6-ed9a-419a-9146-46704cfbffba/page/p_j93cyedlwd/edit",
+        },
+        {
+          name: "Chevrolet",
+          slug: "chevrolet",
+          url: "https://datastudio.google.com/u/0/reporting/06231e88-740b-4be9-9693-ae06abf1c1b4/page/p_uepaetz5vd",
+        },
+        { name: "Volvo", slug: "volvo", url: "" },
+        { name: "Mazda", slug: "mazda", url: "" },
       ];
 
       const grid = document.querySelector("#grid");
       const empty = document.querySelector("#empty");
       const search = document.querySelector("#search");
 
+      const logoUrl = (slug) => `https://cdn.simpleicons.org/${slug}/15171C`;
+
       function fallbackLogo(img, name) {
-        const initials = name.split(/\s|\/+/).filter(Boolean).map((w) => w[0]).slice(0, 2).join("").toUpperCase();
-        const span = document.createElement("span");
-        span.style.fontWeight = "700";
-        span.style.fontSize = "20px";
-        span.style.color = "var(--muted)";
-        span.textContent = initials;
-        img.replaceWith(span);
+        const initials = name
+          .split(/\s|\/+/)
+          .filter(Boolean)
+          .map((word) => word[0])
+          .slice(0, 2)
+          .join("")
+          .toUpperCase();
+        img.replaceWith(document.createTextNode(initials));
       }
 
       function logoMarkup(item) {
-        const className = item.logos.length > 1 ? "logo-box duo" : "logo-box";
-        const logos = item.logos.map((slug) =>
-          `<img src="${LOGO_BASE}/${slug}.png" alt="Logo ${item.name}" onerror="fallbackLogo(this, '${item.name}')" />`
-        ).join("");
+        if (item.logoSrc) {
+          const className = item.logoWide ? "logo-box wide" : "logo-box";
+          return `<div class="${className}">
+            <img src="${item.logoSrc}" alt="Logo ${item.name}" onerror="fallbackLogo(this, '${item.name}')" />
+          </div>`;
+        }
+
+        const slugs = Array.isArray(item.slug) ? item.slug : [item.slug];
+        const className = slugs.length > 1 ? "logo-box duo" : "logo-box";
+        const logos = slugs
+          .map(
+            (slug) =>
+              `<img src="${logoUrl(slug)}" alt="Logo ${item.name}" onerror="fallbackLogo(this, '${item.name}')" />`,
+          )
+          .join("");
         return `<div class="${className}">${logos}</div>`;
       }
 
@@ -390,6 +533,7 @@
         if (!ready) {
           return `<article class="card" data-ready="false" data-name="${item.name.toLowerCase()}"><div class="card-inner" aria-disabled="true">${body}</div></article>`;
         }
+
         return `<article class="card" data-ready="true" data-name="${item.name.toLowerCase()}"><a class="card-inner" href="${item.url}" target="_blank" rel="noreferrer noopener" aria-label="Abrir dashboard de ${item.name}">${body}</a></article>`;
       }
 
