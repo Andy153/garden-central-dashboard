@@ -423,52 +423,60 @@
     </main>
 
     <script>
-      const dashboards = [
-        {
-          name: "Nissan",
-          slug: "nissan",
-          url: "https://datastudio.google.com/u/0/reporting/f480ca6c-1c7e-46b1-9188-fde319b899cc/page/p_uepaetz5vd",
-        },
-        {
-          name: "Fiat",
-          slug: "fiat",
-          url: "https://datastudio.google.com/u/0/reporting/976d9958-05b7-4f68-96cc-6a1e6c4448e2/page/p_uepaetz5vd",
-        },
-        {
-          name: "Jeep / Ram",
-          slug: ["jeep", "ram"],
-          url: "https://datastudio.google.com/u/0/reporting/82f9593b-6484-404e-8b7b-4e37857d8e58/page/p_uepaetz5vd",
-        },
-        {
-          name: "Kia",
-          slug: "kia",
-          url: "https://datastudio.google.com/u/0/reporting/d91a3cfe-78dd-4e6f-be94-cc27d953b210/page/p_uepaetz5vd/edit",
-        },
-        {
-          name: "Chery",
-          slug: "chery",
-          logoSrc: "https://upload.wikimedia.org/wikipedia/commons/b/b6/Chery_logo.svg",
-          logoWide: true,
-          url: "https://datastudio.google.com/u/0/reporting/9978c342-33a1-4945-a3c9-687528dc29b8/page/p_iz784com0d",
-        },
-        {
-          name: "Mini",
-          slug: "mini",
-          url: "https://datastudio.google.com/u/0/reporting/196b9ff5-3862-44fe-9797-49ba2a16e586/page/p_iz784com0d/edit",
-        },
-        {
-          name: "BMW",
-          slug: "bmw",
-          url: "https://datastudio.google.com/u/0/reporting/a2d0e9c6-ed9a-419a-9146-46704cfbffba/page/p_j93cyedlwd/edit",
-        },
-        {
-          name: "Chevrolet",
-          slug: "chevrolet",
-          url: "https://datastudio.google.com/u/0/reporting/06231e88-740b-4be9-9693-ae06abf1c1b4/page/p_uepaetz5vd",
-        },
-        { name: "Volvo", slug: "volvo", url: "https://datastudio.google.com/u/0/reporting/6be4fa37-a5a2-40e8-9f39-23e0d3fc1189/page/p_uepaetz5vd" },
-        { name: "Mazda", slug: "mazda", url: "" },
-      ];
+     const dashboards = [
+  {
+    name: "BMW",
+    slug: "bmw",
+    url: "https://datastudio.google.com/u/0/reporting/a2d0e9c6-ed9a-419a-9146-46704cfbffba/page/p_j93cyedlwd/edit",
+  },
+  {
+    name: "Chevrolet",
+    slug: "chevrolet",
+    url: "https://datastudio.google.com/u/0/reporting/06231e88-740b-4be9-9693-ae06abf1c1b4/page/p_uepaetz5vd",
+  },
+  {
+    name: "Chery",
+    slug: "chery",
+    logoSrc: "https://upload.wikimedia.org/wikipedia/commons/b/b6/Chery_logo.svg",
+    logoWide: true,
+    url: "https://datastudio.google.com/u/0/reporting/9978c342-33a1-4945-a3c9-687528dc29b8/page/p_iz784com0d",
+  },
+  {
+    name: "Fiat",
+    slug: "fiat",
+    url: "https://datastudio.google.com/u/0/reporting/976d9958-05b7-4f68-96cc-6a1e6c4448e2/page/p_uepaetz5vd",
+  },
+  {
+    name: "Jeep / Ram",
+    slug: ["jeep", "ram"],
+    url: "https://datastudio.google.com/u/0/reporting/82f9593b-6484-404e-8b7b-4e37857d8e58/page/p_uepaetz5vd",
+  },
+  {
+    name: "Kia",
+    slug: "kia",
+    url: "https://datastudio.google.com/u/0/reporting/d91a3cfe-78dd-4e6f-be94-cc27d953b210/page/p_uepaetz5vd/edit",
+  },
+  {
+    name: "Mazda",
+    slug: "mazda",
+    url: "",
+  },
+  {
+    name: "MINI",
+    slug: "mini",
+    url: "https://datastudio.google.com/u/0/reporting/196b9ff5-3862-44fe-9797-49ba2a16e586/page/p_iz784com0d/edit",
+  },
+  {
+    name: "Nissan",
+    slug: "nissan",
+    url: "https://datastudio.google.com/u/0/reporting/f480ca6c-1c7e-46b1-9188-fde319b899cc/page/p_uepaetz5vd",
+  },
+  {
+    name: "Volvo",
+    slug: "volvo",
+    url: "https://datastudio.google.com/u/0/reporting/6be4fa37-a5a2-40e8-9f39-23e0d3fc1189/page/p_uepaetz5vd",
+  },
+];
 
       const grid = document.querySelector("#grid");
       const empty = document.querySelector("#empty");
