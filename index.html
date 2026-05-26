@@ -169,6 +169,126 @@
         box-shadow: 0 0 0 4px rgba(23, 107, 135, 0.13);
       }
 
+      /* Featured section (Multimarca) */
+      .featured {
+        margin-bottom: 28px;
+      }
+
+      .section-label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0 0 12px;
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .section-label::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--line);
+      }
+
+      .card-featured {
+        position: relative;
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(23, 107, 135, 0.35);
+        background:
+          radial-gradient(circle at 0% 0%, rgba(23, 107, 135, 0.18), transparent 55%),
+          radial-gradient(circle at 100% 100%, rgba(200, 75, 49, 0.16), transparent 55%),
+          linear-gradient(180deg, #ffffff, #f7fafc);
+        box-shadow: 0 16px 40px rgba(23, 107, 135, 0.14);
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease,
+          border-color 180ms ease;
+      }
+
+      .card-featured:hover {
+        transform: translateY(-3px);
+        border-color: rgba(23, 107, 135, 0.6);
+        box-shadow: 0 22px 52px rgba(23, 107, 135, 0.2);
+      }
+
+      .featured-inner {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 22px;
+        padding: 22px 24px;
+      }
+
+      .featured-icon {
+        display: grid;
+        place-items: center;
+        width: 72px;
+        height: 72px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, var(--accent), #1f8aab);
+        color: #fff;
+        box-shadow: 0 10px 24px rgba(23, 107, 135, 0.35);
+      }
+
+      .featured-icon svg {
+        width: 38px;
+        height: 38px;
+      }
+
+      .featured-body h2 {
+        margin: 0 0 4px;
+        font-size: 1.45rem;
+        line-height: 1.15;
+      }
+
+      .featured-body .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 8px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(23, 107, 135, 0.12);
+        color: var(--accent);
+        font-size: 0.72rem;
+        font-weight: 750;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .featured-body p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+        max-width: 56ch;
+      }
+
+      .featured-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 18px;
+        border-radius: 10px;
+        background: var(--accent);
+        color: #fff;
+        font-weight: 750;
+        white-space: nowrap;
+      }
+
+      .featured-cta svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      /* End featured */
+
       .grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -356,6 +476,17 @@
           height: 48px;
         }
 
+        .featured-inner {
+          grid-template-columns: 1fr;
+          text-align: left;
+          gap: 16px;
+          padding: 20px;
+        }
+
+        .featured-cta {
+          justify-self: start;
+        }
+
         .grid {
           grid-template-columns: 1fr;
         }
@@ -418,6 +549,43 @@
         </label>
       </section>
 
+      <section id="featured" class="featured" aria-label="Dashboard destacado">
+        <p class="section-label">Vista consolidada</p>
+        <a
+          class="card-featured"
+          href="https://datastudio.google.com/reporting/63cb44d2-8f55-442f-86e8-2995c0fb33ae"
+          target="_blank"
+          rel="noreferrer noopener"
+          aria-label="Abrir dashboard Multimarca"
+        >
+          <div class="featured-inner">
+            <div class="featured-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="9" rx="1.5" />
+                <rect x="14" y="3" width="7" height="5" rx="1.5" />
+                <rect x="14" y="12" width="7" height="9" rx="1.5" />
+                <rect x="3" y="16" width="7" height="5" rx="1.5" />
+              </svg>
+            </div>
+            <div class="featured-body">
+              <span class="tag">
+                <span class="status-dot" aria-hidden="true" style="background: var(--accent)"></span>
+                Multimarca
+              </span>
+              <h2>Dashboard Multimarca</h2>
+              <p>Vista consolidada de performance y métricas de todas las marcas del grupo en un solo lugar.</p>
+            </div>
+            <span class="featured-cta">
+              Abrir dashboard
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 17 17 7M9 7h8v8" />
+              </svg>
+            </span>
+          </div>
+        </a>
+      </section>
+
+      <p class="section-label">Por marca</p>
       <section id="grid" class="grid" aria-live="polite"></section>
       <p id="empty" class="empty">No encontré marcas con esa búsqueda.</p>
     </main>
@@ -481,6 +649,7 @@
       const grid = document.querySelector("#grid");
       const empty = document.querySelector("#empty");
       const search = document.querySelector("#search");
+      const featured = document.querySelector("#featured");
 
       const logoUrl = (slug) => `https://cdn.simpleicons.org/${slug}/15171C`;
 
@@ -550,6 +719,10 @@
         const filtered = dashboards.filter((item) => item.name.toLowerCase().includes(query));
         grid.innerHTML = filtered.map(cardMarkup).join("");
         empty.classList.toggle("show", filtered.length === 0);
+
+        // Ocultar la tarjeta destacada si el usuario está buscando una marca específica
+        const isSearching = query.length > 0;
+        featured.style.display = isSearching ? "none" : "";
       }
 
       search.addEventListener("input", render);
